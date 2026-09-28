@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import "../Styles/OrderHistory.css";
+import { getOrderHistory } from "../services/orders.js";
+import { useEffect, useState } from "react";
+
+import "../styles/OrderHistory.css";
 
 const OrderHistory = () => {
   const [orders, setOrders] = useState([]);
-    const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
 
   const token = localStorage.getItem("token");
 
@@ -14,15 +15,12 @@ const OrderHistory = () => {
 
   const getOrders = async () => {
     try {
-      const response = await axios.get(
-        "http://127.0.0.1:8000/api/user/order/history",
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            Accept: "application/json",
-          },
+      const response = await getOrderHistory({
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Accept: "application/json",
         },
-      );
+      });
 
       console.log(response.data);
 
@@ -97,7 +95,7 @@ const OrderHistory = () => {
               </a>
             </div>
           ) : (
-            orders.map((order,index) => (
+            orders.map((order, index) => (
               <article className="history-card" key={`${order.id}-${index}`}>
                 <div className="history-card-header">
                   <div>
@@ -124,7 +122,12 @@ const OrderHistory = () => {
 
                     <span
                       style={{
-                        color: order.order_status === "confirm" ? "green" : order.order_status === "reject" ? "red" : 'yellow',
+                        color:
+                          order.order_status === "confirm"
+                            ? "green"
+                            : order.order_status === "reject"
+                              ? "red"
+                              : "yellow",
                       }}
                     >
                       {order.order_status}

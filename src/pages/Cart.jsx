@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import "../Styles/style.css";
-import "../Styles/Cart.css";
+import "../styles/style.css";
+import "../styles/Cart.css";
 
 const Cart = () => {
   const [cart, setCart] = useState(() => {
@@ -41,7 +41,6 @@ const Cart = () => {
 
   const total = subTotal + fee;
 
- 
   return (
     <>
       <main>
@@ -161,7 +160,7 @@ const Cart = () => {
                 <span>Total</span>
                 <strong className="total"> {money(total)}</strong>
               </div>
-              <Link className="checkout-button" to='/payment'>
+              <Link className="checkout-button" to="/payment">
                 Place order →
               </Link>
               <p className="summary-note">

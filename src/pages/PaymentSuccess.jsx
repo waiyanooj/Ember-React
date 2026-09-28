@@ -1,5 +1,4 @@
-import React from "react";
-import "../Styles/Success.css";
+import "../styles/Success.css";
 import { Link } from "react-router-dom";
 
 const PaymentSuccess = () => {

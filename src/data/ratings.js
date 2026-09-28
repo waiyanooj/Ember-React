@@ -16,3 +16,4 @@ const ratings = [
     rating: 5,
   },
 ];
+export default ratings;

@@ -1,9 +1,8 @@
-import React, { useState } from "react";
-import "./login.css";
-import "../Styles/style.css";
-import styled from "styled-components";
+import { login } from "../../services/auth.js";
+import { useState } from "react";
+import "../../styles/Login.css";
+import "../../styles/style.css";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
 
 const Login = () => {
   const errorMessage = {
@@ -54,13 +53,10 @@ const Login = () => {
     }
 
     try {
-      const response = await axios.post(
-        "http://127.0.0.1:8000/api/user/login",
-        {
-          email: Email,
-          password: Password,
-        },
-      );
+      const response = await login({
+        email: Email,
+        password: Password,
+      });
       console.log(response.data);
       localStorage.setItem("userData", JSON.stringify(response.data));
       localStorage.setItem("token", response.data.token);
@@ -77,9 +73,8 @@ const Login = () => {
   };
 
   const handleGoogleLogin = () => {
-    window.location.href =
-        "http://127.0.0.1:8000/api/user/google/redirect";
-};
+    window.location.href = "http://127.0.0.1:8000/api/user/google/redirect";
+  };
 
   return (
     <>
@@ -111,73 +106,68 @@ const Login = () => {
             </label>
 
             <label>
-  Password
+              Password
+              <div
+                style={{
+                  position: "relative",
+                  width: "100%",
+                }}
+              >
+                <input
+                  type={showPass ? "text" : "password"}
+                  placeholder="Enter your password"
+                  value={Password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  style={{
+                    width: "100%",
+                    paddingRight: "45px",
+                    boxSizing: "border-box",
+                  }}
+                />
 
-  <div
-    style={{
-      position: "relative",
-      width: "100%",
-    }}
-  >
-    <input
-      type={showPass ? "text" : "password"}
-      placeholder="Enter your password"
-      value={Password}
-      onChange={(e) => setPassword(e.target.value)}
-      style={{
-        width: "100%",
-        paddingRight: "45px",
-        boxSizing: "border-box",
-      }}
-    />
-
-    <button
-      type="button"
-      onClick={() => setShowPass(!showPass)}
-      style={{
-        position: "absolute",
-        right: "10px",
-        top: "50%",
-        transform: "translateY(-50%)",
-        width: "40px",
-        height: "30px",
-        padding: 0,
-        margin: 0,
-        background: "transparent",
-        border: "none",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        cursor: "pointer",
-        color : "rgba(75, 75, 75, 0.64)"
-      }}
-    >
-      <iconify-icon
-        icon={showPass ? "akar-icons:eye-closed" : "akar-icons:eye"}
-        width="25"
-        height="25"
-      ></iconify-icon>
-    </button>
-  </div>
-
-  {errorRequired.Password && (
-    <span style={errorMessage}>
-      {errorRequired.Password}
-    </span>
-  )}
-
-  {LoginError && (
-    <span style={errorMessage}>
-      {LoginError}
-    </span>
-  )}
-</label>
+                <button
+                  type="button"
+                  onClick={() => setShowPass(!showPass)}
+                  style={{
+                    position: "absolute",
+                    right: "10px",
+                    top: "50%",
+                    transform: "translateY(-50%)",
+                    width: "40px",
+                    height: "30px",
+                    padding: 0,
+                    margin: 0,
+                    background: "transparent",
+                    border: "none",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    cursor: "pointer",
+                    color: "rgba(75, 75, 75, 0.64)",
+                  }}
+                >
+                  <iconify-icon
+                    icon={showPass ? "akar-icons:eye-closed" : "akar-icons:eye"}
+                    width="25"
+                    height="25"
+                  ></iconify-icon>
+                </button>
+              </div>
+              {errorRequired.Password && (
+                <span style={errorMessage}>{errorRequired.Password}</span>
+              )}
+              {LoginError && <span style={errorMessage}>{LoginError}</span>}
+            </label>
             <button className="auth-btn" type="submit">
               Login
             </button>
             {/* <div style={eMessage}>This Message is Bla Bla Bla!</div> */}
 
-            <button className="google-btn" type="button" onClick={handleGoogleLogin}>
+            <button
+              className="google-btn"
+              type="button"
+              onClick={handleGoogleLogin}
+            >
               <span>G</span> Login with Google
             </button>
           </form>

@@ -166,10 +166,10 @@ body {
   color: var(--orange);
 }
 
-.menu-category-bar{
-    display: flex;
-    gap: 10px;
-    height: 60px;
+.menu-category-bar {
+  display: flex;
+  gap: 10px;
+  height: 60px;
 }
 
 .menu-category-btn {
@@ -322,12 +322,12 @@ body {
   pointer-events: auto;
 }
 
-.rate-btn{
-    background-color: #f8b652;
-    width: 80px;
-    height: 30px;
-    border-radius: 20px;
-    color: #68581b;
+.rate-btn {
+  background-color: #f8b652;
+  width: 80px;
+  height: 30px;
+  border-radius: 20px;
+  color: #68581b;
 }
 
 .rating-popup-card {

@@ -1,8 +1,7 @@
-import React, { useEffect, useRef, useState } from "react";
-import "../Styles/Menu.css";
+import { getProducts } from "../services/products.js";
+import { useEffect, useRef, useState } from "react";
+import "../styles/Menu.css";
 import { Link } from "react-router-dom";
-import menuData from "./MenuData/Data";
-import axios from "axios";
 
 const Menu = () => {
   ///////////////////////////
@@ -109,12 +108,12 @@ const Menu = () => {
   const [selectedProduct, setSelectedProduct] = useState(null);
 
   const [saveToast, setSaveToast] = useState(false);
-  const [removeToast, setRemoveToast] = useState(false)
-  const saveToastTimer = useRef(null)
+  const [removeToast, setRemoveToast] = useState(false);
+  const saveToastTimer = useRef(null);
   const removeTimer = useRef(null);
 
   /////////////////////////////////
-  // Save Cart for Profile 
+  // Save Cart for Profile
   ////////////////////////////////
 
   const [saveProfile, setSaveProfile] = useState(() => {
@@ -123,7 +122,7 @@ const Menu = () => {
     return saveItemProfile ? JSON.parse(saveItemProfile) : [];
   });
 
-  useEffect(() => { 
+  useEffect(() => {
     localStorage.setItem("saveProfile", JSON.stringify(saveProfile));
   }, [saveProfile]);
 
@@ -137,14 +136,13 @@ const Menu = () => {
         (item) => item.name === productProfileName,
       );
 
-      
       if (profileItem) {
         setSaveToast(false);
         setRemoveToast(true);
         clearTimeout(removeTimer.current);
         removeTimer.current = setTimeout(() => {
-          setRemoveToast(false)
-        },2400);
+          setRemoveToast(false);
+        }, 2400);
         return prevProfile.filter((item) => item.name !== productProfileName);
       }
 
@@ -156,16 +154,14 @@ const Menu = () => {
           image: productImage,
         },
       ];
-
     });
 
-      setSaveToast(true)
-    clearTimeout(saveToastTimer.current)
+    setSaveToast(true);
+    clearTimeout(saveToastTimer.current);
     saveToastTimer.current = setTimeout(() => {
-      setSaveToast(false)
-    },2400);
-
-  };  
+      setSaveToast(false);
+    }, 2400);
+  };
 
   /////////////////////////////////
   // Data from Laravel APIs
@@ -173,28 +169,28 @@ const Menu = () => {
   const [Product, setProduct] = useState([]);
 
   const handleMenu = async () => {
-    try{
-      const response = await axios.get('http://127.0.0.1:8000/api/user/productList')
+    try {
+      const response = await getProducts();
       console.log(response.data);
-      
-      setProduct(response.data.product)
-    }catch(e){
+
+      setProduct(response.data.product);
+    } catch (e) {
       console.log(e);
-      
     }
-  }
+  };
 
   useEffect(() => {
-    handleMenu()
-  },[]);
+    handleMenu();
+  }, []);
 
-  const categories= [
+  const categories = [
     "all",
-    ...new Set(Product.map((item)=>item.category_name?.toLowerCase()).filter(Boolean))
-  ]
+    ...new Set(
+      Product.map((item) => item.category_name?.toLowerCase()).filter(Boolean),
+    ),
+  ];
 
   console.log(Product);
-  
 
   return (
     <>
@@ -242,26 +238,26 @@ const Menu = () => {
         </div>
 
         <div className="menu-grid">
-          {Product
-            .filter((item) => Filter === "all" || item.category_name?.toLowerCase() === Filter)
-            .map((item) => {
-              
-             const isSaved = saveProfile.some(
-              (saveItem) => saveItem.name === item.name
-             );
-             return(
-               <article
+          {Product.filter(
+            (item) =>
+              Filter === "all" || item.category_name?.toLowerCase() === Filter,
+          ).map((item) => {
+            const isSaved = saveProfile.some(
+              (saveItem) => saveItem.name === item.name,
+            );
+            return (
+              <article
                 className="menu-card"
                 key={item.id}
                 data-category={item.category}
               >
                 <img src={item.image} alt={item.name} />
-                
+
                 <button
                   className={`save-item ${isSaved ? "saved" : ""}`}
                   data-product={item.name}
-                  data-price = {(item.price / 100) .toFixed(2)}
-                  data-img = {item.image}
+                  data-price={(item.price / 100).toFixed(2)}
+                  data-img={item.image}
                   aria-label={`Save ${item.name}`}
                   title={`Save ${item.name}`}
                   onClick={handelProfileSave}
@@ -288,7 +284,9 @@ const Menu = () => {
                   </div>
                   <p>{item.description}</p>
                   <div className="menu-meta">
-                    <span className="menu-price">${(item.price / 100).toFixed(2)}</span>
+                    <span className="menu-price">
+                      ${(item.price / 100).toFixed(2)}
+                    </span>
                     <div className="menu-order-controls">
                       <button
                         className="rate-btn"
@@ -323,8 +321,8 @@ const Menu = () => {
                   </div>
                 </div>
               </article>
-             )
-})}
+            );
+          })}
         </div>
         {Toast && (
           <div
@@ -398,7 +396,6 @@ const Menu = () => {
           </div>
         )}
 
-        
         <div
           className={`rating-popup ${Rating ? "show" : ""}`}
           id="ratingPopup"

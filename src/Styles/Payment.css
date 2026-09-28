@@ -1,172 +1,172 @@
 body {
-        min-height: 100vh;
-        background: linear-gradient(135deg, #f7efe2 0%, #ece0d0 100%);
-      }
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f7efe2 0%, #ece0d0 100%);
+}
 
-      .payment-page {
-        padding: 40px 5.5vw 70px;
-      }
+.payment-page {
+  padding: 40px 5.5vw 70px;
+}
 
-      .payment-shell {
-        max-width: 1100px;
-        margin: 0 auto;
-        display: grid;
-        grid-template-columns: 1.15fr 0.85fr;
-        gap: 28px;
-        align-items: start;
-      }
+.payment-shell {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 28px;
+  align-items: start;
+}
 
-      .payment-card,
-      .payment-summary {
-        background: rgba(255,255,255,0.9);
-        border: 1px solid rgba(36,36,33,0.08);
-        border-radius: 28px;
-        box-shadow: 0 20px 50px rgba(36,36,33,0.08);
-        margin-top: 80px;
-      }
+.payment-card,
+.payment-summary {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(36, 36, 33, 0.08);
+  border-radius: 28px;
+  box-shadow: 0 20px 50px rgba(36, 36, 33, 0.08);
+  margin-top: 80px;
+}
 
-      .payment-card {
-        padding: 32px;
-      }
+.payment-card {
+  padding: 32px;
+}
 
-      .payment-summary {
-        padding: 28px;
-        position: sticky;
-        top: 24px;
-      }
+.payment-summary {
+  padding: 28px;
+  position: sticky;
+  top: 24px;
+}
 
-      .payment-title {
-        font-family: var(--serif);
-        font-size: 32px;
-        margin: 8px 0 8px;
-        letter-spacing: -1px;
-      }
+.payment-title {
+  font-family: var(--serif);
+  font-size: 32px;
+  margin: 8px 0 8px;
+  letter-spacing: -1px;
+}
 
-      .payment-subtext {
-        color: rgba(36,36,33,0.7);
-        margin: 0 0 24px;
-        line-height: 1.6;
-      }
+.payment-subtext {
+  color: rgba(36, 36, 33, 0.7);
+  margin: 0 0 24px;
+  line-height: 1.6;
+}
 
-      .test-card-hint {
-        font-size: 0.95rem;
-        color: rgba(36,36,33,0.75);
-        background: rgba(255,247,236,0.9);
-        border: 1px solid rgba(255,127,80,0.25);
-        border-radius: 16px;
-        padding: 16px;
-        margin-top: 16px;
-      }
+.test-card-hint {
+  font-size: 0.95rem;
+  color: rgba(36, 36, 33, 0.75);
+  background: rgba(255, 247, 236, 0.9);
+  border: 1px solid rgba(255, 127, 80, 0.25);
+  border-radius: 16px;
+  padding: 16px;
+  margin-top: 16px;
+}
 
-      .payment-grid {
-        display: grid;
-        gap: 16px;
-      }
+.payment-grid {
+  display: grid;
+  gap: 16px;
+}
 
-      .payment-grid label {
-        display: grid;
-        gap: 8px;
-        font-weight: 600;
-        font-size: 14px;
-      }
+.payment-grid label {
+  display: grid;
+  gap: 8px;
+  font-weight: 600;
+  font-size: 14px;
+}
 
-      .payment-grid input,
-      .payment-grid select {
-        padding: 12px 14px;
-        border: 1px solid rgba(36,36,33,0.15);
-        border-radius: 12px;
-        font: inherit;
-        background: #fff;
-      }
+.payment-grid input,
+.payment-grid select {
+  padding: 12px 14px;
+  border: 1px solid rgba(36, 36, 33, 0.15);
+  border-radius: 12px;
+  font: inherit;
+  background: #fff;
+}
 
-      .payment-row {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 16px;
-      }
+.payment-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
 
-      .payment-methods {
-        display: flex;
-        gap: 10px;
-        flex-wrap: wrap;
-        margin: 8px 0 20px;
-      }
+.payment-methods {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 8px 0 20px;
+}
 
-      .payment-methods button {
-        padding: 10px 14px;
-        border-radius: 999px;
-        background: #f3ebdf;
-        color: var(--ink);
-        font-weight: 600;
-      }
+.payment-methods button {
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: #f3ebdf;
+  color: var(--ink);
+  font-weight: 600;
+}
 
-      .payment-methods .active {
-        background: var(--ink);
-        color: white;
-      }
+.payment-methods .active {
+  background: var(--ink);
+  color: white;
+}
 
-      .pay-btn {
-        width: 100%;
-        margin-top: 10px;
-        padding: 14px 18px;
-        border-radius: 999px;
-        background: var(--orange);
-        color: white;
-        font-weight: 700;
-        border: 0;
-      }
+.pay-btn {
+  width: 100%;
+  margin-top: 10px;
+  padding: 14px 18px;
+  border-radius: 999px;
+  background: var(--orange);
+  color: white;
+  font-weight: 700;
+  border: 0;
+}
 
-      .summary-line {
-        display: flex;
-        justify-content: space-between;
-        padding: 10px 0;
-        border-bottom: 1px solid rgba(36,36,33,0.1);
-        color: rgba(36,36,33,0.8);
-      }
+.summary-line {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(36, 36, 33, 0.1);
+  color: rgba(36, 36, 33, 0.8);
+}
 
-      .summary-line.total {
-        font-size: 18px;
-        color: var(--ink);
-        border-bottom: 0;
-      }
+.summary-line.total {
+  font-size: 18px;
+  color: var(--ink);
+  border-bottom: 0;
+}
 
-      .summary-note {
-        margin-top: 16px;
-        font-size: 13px;
-        color: rgba(36,36,33,0.65);
-      }
+.summary-note {
+  margin-top: 16px;
+  font-size: 13px;
+  color: rgba(36, 36, 33, 0.65);
+}
 
-      .back {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            padding: 20px 40px;
-            z-index: 100;
-        }
+.back {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px 40px;
+  z-index: 100;
+}
 
-        .back-b a{
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
+.back-b a {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
 
-      @media (max-width: 900px) {
-        .payment-shell {
-          grid-template-columns: 1fr;
-        }
+@media (max-width: 900px) {
+  .payment-shell {
+    grid-template-columns: 1fr;
+  }
 
-        .payment-summary {
-          position: static;
-        }
+  .payment-summary {
+    position: static;
+  }
 
-        .back{
-            position: relative;
-            top:-45px;
-            left: -43px;
-        }
+  .back {
+    position: relative;
+    top: -45px;
+    left: -43px;
+  }
 
-        .payment-card{
-            margin-top: -55px;
-        }
-      }
+  .payment-card {
+    margin-top: -55px;
+  }
+}

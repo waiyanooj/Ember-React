@@ -1,10 +1,9 @@
-import React, { useEffect, useRef, useState } from "react";
-import "../Styles/style.css";
-import "../Styles/profileBtn.css";
+import { logout } from "../services/auth.js";
+import { getProducts } from "../services/products.js";
+import { useEffect, useRef, useState } from "react";
+import "../styles/style.css";
+import "../styles/profileBtn.css";
 import { Link } from "react-router-dom";
-import menuData from "./MenuData/Data";
-import axios from "axios";
-
 
 const Home = () => {
   // Loading Animation
@@ -150,34 +149,32 @@ const Home = () => {
   const [userOldData, setUserOldData] = useState(() => {
     const saveData = localStorage.getItem("userData");
     console.log(saveData);
-    
+
     return saveData ? JSON.parse(saveData) : null;
   });
 
   const handleLogout = async (e) => {
     e.preventDefault();
 
-    try{
+    try {
       const token = localStorage.getItem("token");
       console.log("TOKEN:", token);
 
-      await axios.post(
-        "http://127.0.0.1:8000/api/user/logout",
+      await logout(
         {},
         {
           headers: {
             Authorization: `Bearer ${token}`,
             Accept: "application/json",
-          }
-        }
+          },
+        },
       );
-      
+
       localStorage.removeItem("token");
       localStorage.removeItem("userData");
-      
+
       setUserOldData(null);
       window.location.href = "/";
-
     } catch (error) {
       console.error("Error logging out:", error);
     }
@@ -185,34 +182,33 @@ const Home = () => {
 
   console.log(userOldData);
 
-  const[product, setProduct] = useState([]);
+  const [product, setProduct] = useState([]);
 
   const handleMenu = async () => {
-    try{
-      const response = await axios.get("http://127.0.0.1:8000/api/user/productList") 
+    try {
+      const response = await getProducts();
 
       console.log(response.data);
-      
 
-      setProduct(response.data.product)
-
-    }catch(error){
+      setProduct(response.data.product);
+    } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   useEffect(() => {
-    handleMenu()
-  },[]);
+    handleMenu();
+  }, []);
 
-  const categories= [
+  const categories = [
     "all",
-    ...new Set(product.map((item)=>item.category_name?.toLowerCase()).filter(Boolean))
-  ]
+    ...new Set(
+      product.map((item) => item.category_name?.toLowerCase()).filter(Boolean),
+    ),
+  ];
 
   const saveData = localStorage.getItem("userData");
-console.log("userData =", saveData);
-  
+  console.log("userData =", saveData);
 
   return (
     <>
@@ -384,21 +380,23 @@ console.log("userData =", saveData);
               </Link>
             </div>
             <div className="menu-tabs reveal" role="tablist">
-              {categories.map(
-                (category) => (
-                  <button
-                    key={category}
-                    className={`${Filter === category ? "selected" : ""}`}
-                    onClick={() => setFilter(category)}
-                  >
-                    {category.charAt(0).toUpperCase() + category.slice(1)}
-                  </button>
-                ),
-              )}
+              {categories.map((category) => (
+                <button
+                  key={category}
+                  className={`${Filter === category ? "selected" : ""}`}
+                  onClick={() => setFilter(category)}
+                >
+                  {category.charAt(0).toUpperCase() + category.slice(1)}
+                </button>
+              ))}
             </div>
             <div className="product-grid">
               {product
-                .filter((item) => Filter === "all" || item.category_name?.toLowerCase() === Filter)
+                .filter(
+                  (item) =>
+                    Filter === "all" ||
+                    item.category_name?.toLowerCase() === Filter,
+                )
                 .slice(0, 4)
                 .map((item) => (
                   <article

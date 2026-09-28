@@ -1,9 +1,9 @@
-import React, { useState,useEffect } from "react";
-import "../Styles/style.css";
-import "./register.css";
+import { register } from "../../services/auth.js";
+import { useState, useEffect } from "react";
+import "../../styles/style.css";
+import "../../styles/Register.css";
 import Styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
 
 const ErrorMessage = Styled.div`
     color : ${(props) => (props.$isError ? "red" : "")};
@@ -25,30 +25,29 @@ const PasswordConfirmCheck = Styled.div`
     font-size : ${(props) => (props.$isConfirmPassword ? "14px" : "")};
 `;
 
-
 const Register = () => {
   const RequireError = {
-    color : 'red',
-    fontSize : '14px'
-}
+    color: "red",
+    fontSize: "14px",
+  };
 
-const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const [Text, setText] = useState("");
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
   const [Require, setRequire] = useState({});
   const [userData, setUserData] = useState(() => {
-  const userSave = localStorage.getItem('userData');
-  return userSave ? JSON.parse(userSave) : [];
+    const userSave = localStorage.getItem("userData");
+    return userSave ? JSON.parse(userSave) : [];
   });
-  const[ConfirmPassword, setConfirmPassword] = useState('');
-  const [show,setShow] = useState(false);
+  const [ConfirmPassword, setConfirmPassword] = useState("");
+  const [show, setShow] = useState(false);
 
   const isConfirmPassword = Password !== ConfirmPassword;
 
   useEffect(() => {
-  localStorage.setItem('userData', JSON.stringify(userData));
+    localStorage.setItem("userData", JSON.stringify(userData));
   }, [userData]);
 
   const isError = /\d/.test(Text);
@@ -81,10 +80,10 @@ const navigate = useNavigate();
 
   //   if (!Email.trim()) {
   //     isRequire.Email = "Email is Require";
-  //   } 
+  //   }
   //   if (!Text.trim()) {
   //     isRequire.Text = "User Name is Require.";
-  //   } 
+  //   }
   //   if (!Password.trim()) {
   //     isRequire.Password = "Password is Require";
   //   }
@@ -110,17 +109,17 @@ const navigate = useNavigate();
 
   console.log(userData);
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-     const isRequire = {};
+    const isRequire = {};
 
     if (!Email.trim()) {
       isRequire.Email = "Email is Require";
-    } 
+    }
     if (!Text.trim()) {
       isRequire.Text = "User Name is Require.";
-    } 
+    }
     if (!Password.trim()) {
       isRequire.Password = "Password is Require";
     }
@@ -135,27 +134,24 @@ const navigate = useNavigate();
     //   return [...prevUserData, newUser];
     // });
 
-    try{
+    try {
+      const response = await register({
+        name: Text,
+        email: Email,
+        password: Password,
+        password_confirmation: ConfirmPassword,
+      });
 
-      const response = await axios.post('http://127.0.0.1:8000/api/user/register', {
-      name: Text,
-      email: Email,
-      password: Password,
-      password_confirmation: ConfirmPassword,
-    });
+      console.log(response.data);
 
-    console.log(response.data)
+      localStorage.setItem("token", response.data.token);
 
-    localStorage.setItem("token", response.data.token)
+      localStorage.setItem("userData", JSON.stringify(response.data));
 
-    localStorage.setItem('userData', JSON.stringify(response.data));
-
-     navigate("/");
-
-    }catch(error){
+      navigate("/");
+    } catch (error) {
       console.log(error.response?.data);
     }
-
   };
 
   // const [userData, setUserData] = useState(() => {
@@ -254,7 +250,7 @@ const navigate = useNavigate();
               )}
             </label>
 
-             <label>
+            <label>
               Confirm Password
               <input
                 type={show ? "text" : "password"}
@@ -273,18 +269,17 @@ const navigate = useNavigate();
                   Passwords do not match.
                 </PasswordConfirmCheck>
               )}
-              <div className="showPass" style={{marginTop: "5px"}}>
-                          <input
-                            type="checkbox"
-                            id="showPassword"
-                            checked={show}
-                            onChange={(e) => setShow(e.target.checked)}
-                          />
-                          <label htmlFor="showPassword" style={{marginTop: "0px"}}>
-                            Show Your Password
-                          </label>
-                        </div>
-                      
+              <div className="showPass" style={{ marginTop: "5px" }}>
+                <input
+                  type="checkbox"
+                  id="showPassword"
+                  checked={show}
+                  onChange={(e) => setShow(e.target.checked)}
+                />
+                <label htmlFor="showPassword" style={{ marginTop: "0px" }}>
+                  Show Your Password
+                </label>
+              </div>
             </label>
 
             <button className="auth-btn" type="submit">
@@ -293,7 +288,7 @@ const navigate = useNavigate();
           </form>
 
           <p className="auth-link">
-             <Link to="/login">Already an account?</Link>
+            <Link to="/login">Already an account?</Link>
           </p>
         </div>
       </main>

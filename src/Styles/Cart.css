@@ -142,7 +142,7 @@
 }
 
 .order-summary .eyebrow {
-  color: rgba(255,255,255,0.7);
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .order-summary h2 {
@@ -154,8 +154,8 @@
   display: flex;
   justify-content: space-between;
   padding: 10px 0;
-  border-bottom: 1px solid rgba(255,255,255,0.14);
-  color: rgba(255,255,255,0.84);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+  color: rgba(255, 255, 255, 0.84);
 }
 
 .summary-line.total {
@@ -188,15 +188,15 @@
 .summary-note {
   margin: 12px 0 0;
   font-size: 13px;
-  color: rgba(255,255,255,0.7);
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .confirmation {
   margin-top: 16px;
   padding: 14px;
   border-radius: 16px;
-  background: rgba(255,255,255,0.12);
-  color: rgba(255,255,255,0.9);
+  background: rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.9);
   display: none;
 }
 
@@ -208,7 +208,7 @@
   padding: 36px;
   border: 1px dashed rgba(36, 36, 33, 0.2);
   border-radius: 24px;
-  background: rgba(255,255,255,0.5);
+  background: rgba(255, 255, 255, 0.5);
   text-align: center;
 }
 
@@ -217,7 +217,7 @@
 }
 
 .empty-cart p {
-  color: rgba(36,36,33,0.7);
+  color: rgba(36, 36, 33, 0.7);
   margin-bottom: 18px;
 }
 
